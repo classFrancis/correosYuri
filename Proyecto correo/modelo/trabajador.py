@@ -18,7 +18,7 @@ class Trabajador:
         self.__contactosDeEmergencia = contactosDeEmergencia
         
     def __str__(self):
-        return f'Rut: {self.__rutTrabajador} \nNombre: {self.__nombreTrabajador} \nGénero: {self.__generoTrabajador} \nTeléfono: {self.__telefonoTrabajador} \nDirección: {self.__direccionTrabajador} \n------------------\nUsuario: \n{self.__usuario} \n------------------\nDatos Laborales: \n{self.__datosLaborales} \n------------------\nCargas Familiares: \n{self.__cargasFamiliares} \n------------------\nContactos de Emergencia: \n{self.__contactosDeEmergencia}'    
+        return f'|Rut: {self.__rutTrabajador} \n|Nombre: {self.__nombreTrabajador} \n|Género: {self.__generoTrabajador} \n|Teléfono: {self.__telefonoTrabajador} \n|Dirección: {self.__direccionTrabajador} \n------------------\n|Usuario\n------------------\n{self.__usuario} \n------------------\n|Datos Laborales\n------------------\n{self.__datosLaborales} \n------------------\n|Cargas Familiares\n------------------\n{self.__cargasFamiliares} \n------------------\n|Contactos de Emergencia\n------------------\n{self.__contactosDeEmergencia}'    
 
     def setRutTrabajador(self, rutTrabajador):
         self.__rutTrabajador = rutTrabajador

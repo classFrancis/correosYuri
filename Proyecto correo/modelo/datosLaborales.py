@@ -8,7 +8,7 @@ class DatosLaborales():
         self.__depto = depto
         
     def __str__(self):
-        return f'ID: {self.__idDatosLaborales} \nFecha de Contratación: {self.__fechaContratacion} \nCargo: {self.__cargo}\nDepartamento: {self.__depto}'
+        return f'|ID: {self.__idDatosLaborales} \n|Fecha de Contratación: {self.__fechaContratacion} \n|Cargo: {self.__cargo}\n|Departamento: {self.__depto}'
 
     def setIdDatosLaborales(self, idDatosLaborales):
         self.__idDatosLaborales = idDatosLaborales

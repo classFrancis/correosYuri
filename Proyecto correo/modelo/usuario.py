@@ -7,7 +7,7 @@ class Usuario():
         self.__claveAcceso = claveAcceso
         
     def __str__(self):
-        return f'ID: {self.__idUsuario} \nNombre: {self.__nombre} \n'
+        return f'|ID: {self.__idUsuario} \n|Nombre: {self.__nombre}'
 
     def setIdUsuario(self, idUsuario):
         self.__idUsuario = idUsuario

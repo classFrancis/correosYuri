@@ -19,7 +19,7 @@ def inicio(user):
         
 def menuAdministradorRRHH(user):
      while True:
-        print("Bienvenid@ al Menu de Administrador")
+        print("\nBienvenid@ al Menu de Administrador")
         print("\nPor favor elige una opción del siguiente menú:")
         print("1. Ver Mis Datos")
         print("2. Registrar Trabajador")
@@ -37,8 +37,7 @@ def menuAdministradorRRHH(user):
         if choice == 1:
             print("\nHas elegido la opción 1")
             datosUser = TrabajadorDTO().mostrarDatosPorUseryPass(user[0],user[1])
-            print(f'Estos son tus datos en el sistema: \n{datosUser}')
-            
+            print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n-----------------------------------\n{datosUser}')
         elif choice == 2:
             print("\nHas elegido la opción 2")
         elif choice == 3:
@@ -56,7 +55,7 @@ def menuAdministradorRRHH(user):
       
 def menuGerencia(user):
     while True:
-        print("Bienvenid@ al Menu Gerencial")
+        print("\nBienvenid@ al Menu Gerencial")
         print("\nPor favor elige una opción del siguiente menú:")
         print("1. Ver Mis Datos")
         print("2. Opción 2")
@@ -74,7 +73,7 @@ def menuGerencia(user):
         if choice == 1:
             print("\nHas elegido la opción 1")
             datosUser = TrabajadorDTO().mostrarDatosPorUseryPass(user[0],user[1])
-            print(datosUser)
+            print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n----------------------------------\n{datosUser}')
         elif choice == 2:
             print("\nHas elegido la opción 2")
         elif choice == 3:
@@ -91,7 +90,7 @@ def menuGerencia(user):
     
 def menuTrabajadores(user):
     while True:
-        print('Bienvenid@ al Menu Principal')
+        print('\nBienvenid@ al Menu Principal')
         print("\nPor favor elige una opción del siguiente menú:")
         print("1. Ver Mis Datos")
         print("2. Opción 2")
@@ -109,7 +108,7 @@ def menuTrabajadores(user):
         if choice == 1:
             print("\nHas elegido la opción 1")
             datosUser = TrabajadorDTO().mostrarDatosPorUseryPass(user[0],user[1])
-            print(datosUser)
+            print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n-----------------------------------\n{datosUser}')
         elif choice == 2:
             print("\nHas elegido la opción 2")
         elif choice == 3:

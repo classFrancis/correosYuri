@@ -9,7 +9,7 @@ class CargasFamiliares():
         self.__generoCarga = generoCarga
     
     def __str__(self):
-        return f'ID: {self.__idCarga} \nRUT: {self.__rutCarga} \nNombre: {self.__nombreCarga} \nParentesco: {self.__parentescoCarga} \nGénero: {self.__generoCarga}'    
+        return f'|D: {self.__idCarga} \n|RUT: {self.__rutCarga} \n|Nombre: {self.__nombreCarga} \n|Parentesco: {self.__parentescoCarga} \n|Género: {self.__generoCarga}'    
 
     def setIdCarga(self, idCarga):
         self.__idCarga = idCarga

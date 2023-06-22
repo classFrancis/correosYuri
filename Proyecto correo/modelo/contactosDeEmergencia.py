@@ -9,7 +9,7 @@ class ContactosDeEmergencia():
         self.__telefonoContacto = telefonoContacto
     
     def __str__(self):
-        return f'ID: {self.__idContacto} \nRUT: {self.__rutContacto} \nNombre: {self.__nombreContacto} \nRelación con Trabajador: {self.__relacionConTrabajador} \nTeléfono Contacto: {self.__telefonoContacto}'
+        return f'|ID: {self.__idContacto} \n|RUT: {self.__rutContacto} \n|Nombre: {self.__nombreContacto} \n|Relación con Trabajador: {self.__relacionConTrabajador} \n|Teléfono Contacto: {self.__telefonoContacto}'
 
     def setIdContacto(self, idContacto):
         self.__idContacto = idContacto

@@ -11,13 +11,28 @@ class daoTrabajador:
     def getConex(self):
         return self.conn
     
-
+    
     def validarLogin(self,nombreUsuario, claveUsuario):
         sql = "SELECT nombre_de_usuario, clave_accesos FROM usuario WHERE nombre_de_usuario = %s AND clave_accesos = %s;"
         c = self.getConex()
         try:
             cursor = c.getConex().cursor()
             cursor.execute(sql, (nombreUsuario, claveUsuario))
+
+            resultado = cursor.fetchone()
+        except Exception as ex:
+            print(traceback.print_exc())
+        finally:
+            if c.getConex().is_connected():
+                c.closeConex()
+        return resultado
+    
+    def validarRut(self,rut):
+        sql = 'select * from trabajador where rut = %s;'
+        c = self.getConex()
+        try:
+            cursor = c.getConex().cursor()
+            cursor.execute(sql, (rut,))
 
             resultado = cursor.fetchone()
         except Exception as ex:
@@ -85,8 +100,23 @@ class daoTrabajador:
                 c.closeConex()
         return resultado
     
-    
-      
-
-
-    
+    def addTrabajadaror(self,rutTrab,nombTrab,generoTrab,telefonoTrab,direccionTrab):
+        sql = """INSERT INTO trabajador(rut, nombre, genero, telefono, direccion)
+                    VALUES(%s, %s, %s, %s, %s);"""
+        c = self.getConex()
+        try:
+            cursor = c.getConex().cursor()
+            cursor.execute(sql, (rutTrab, nombTrab,generoTrab ,telefonoTrab ,direccionTrab))
+            c.getConex().commit()
+            filas = cursor.rowcount
+            if filas > 0:
+                mensaje ="Datos agregados satisfactoriamente"
+            else:
+                mensaje="No se Agregaron datos"
+        except Exception as ex:
+            print(traceback.print_exc())
+            mensaje = "Problemas con la base de datos..vuelva a intentarlo"
+        finally:
+            if c.getConex().is_connected():
+                c.closeConex()
+        return mensaje

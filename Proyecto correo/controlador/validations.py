@@ -21,6 +21,7 @@ def validarRutTrab():
                 print("El rut ingresado ya existe en el registro")
         else:
             print("No se permite un rut vacio")
+    return rutTrab
 
 def validarNombreUsuario():
     while True:
@@ -33,6 +34,7 @@ def validarNombreUsuario():
                 print('El nombre de usuario ya existe')
         else:
             print("Debe ingresar un nombre de usuario valido")
+    return nombreUsuario
         
     
 def addTrabajadorAlSistema():
@@ -48,6 +50,7 @@ def addTrabajadorAlSistema():
     addDatosLaborales(rutTrab)
     addCargasFamiliares(rutTrab)
     addContactosDeEmergencia(rutTrab)
+    print("\nDatos registrados con exito\n")
         
 def addUsuario(rutTrab):   
     print('Ahora debe crear las credenciales de Usuario para el trabajador')
@@ -110,6 +113,50 @@ def addContactosDeEmergencia(rutTrab):
             print("Por favor, ingrese Y para si, o N para no.")
         if otroContacto == 'N':
             break
+
+        
+def modificarDatosPersonales(rut):
+    resultado = TrabajadorDTO().validarRut(rut)
+    print('Por motivos de seguridad el rut no se puede modificar desde el aplicativo')
+    print("Para modificar el rut de un trabajador debe contactarse con el encargado de la base de datos")
+    print(f"Sus datos personales actuales son: {resultado}")
+    nombre = input("Ingrese el nuevo nombre\n").capitalize()
+    apellido = input("ingrese el nuevo apellido\n").capitalize()
+    nombreComp = nombre+" "+apellido
+    genero = input("Ingrese el genero use (F) si es femenino o (M) si es masculino\n").upper()
+    telefono = input("Ingrese el nuevo numero de telefono\n")
+    direccion = input("Ingrese la nueva direccion\n")
+    TrabajadorDTO().modificarDatosPersonales(nombreComp,genero,telefono,direccion,rut)
+
+def modificarCargasFamiliares(rutTrab):
+    resultado = CargasFamiliaresDTO().obtenerDatosDeCargas(rutTrab)
+    print("Estas son las cargas familiares asociadas:")
+    for x in resultado:
+        print(x)
+    rutCar = input("Ingrese el rut de la carga familiar a modificar\n")
+    rutCarga = input("Ingrese el nuevo rut de la carga familiar\n")
+    nombCarga = input("Ingrese el nuevo nombre de la carga familiar\n").capitalize()
+    apellCarga = input("Ingrese el nuevo apellido de la carga familiar\n").capitalize()
+    nombCompCarga = nombCarga+" "+apellCarga
+    parentesco = input("Ingrese el parentesco\n").capitalize()
+    generoCarga = input("Ingrese el genero de la carga familiar, use (M) o (F)\n").upper()
+    CargasFamiliaresDTO().modificarCargasFamiliares(rutCarga,nombCompCarga,parentesco,generoCarga,rutTrab,rutCar)
+
+def modificarContactosDeEmergencia(rutTrab):
+    resultado = ContactosDeEmergenciaDTO().obtenerDatosDeContactos(rutTrab)
+    print("Estos son los contactos de emergencia asociados:")
+    for x in resultado:
+        print(x)
+    rutCont = input("Ingrese el rut del contacto a modificar\n")
+    rutContact = input("ingrese el rut del contacto\n")
+    nombContact = input("Ingrese el nombre del contacto\n").capitalize()
+    apellContact = input("Ingrese el apeelido del contacto\n").capitalize()
+    nombreCompContact = nombContact+" "+apellContact
+    relacionContact = input("Ingrese la relacion del contacto con el trabajador\n").capitalize()
+    telefonoContact = input("Ingrese el telefono del contacto de emergencia\n")
+    ContactosDeEmergenciaDTO().modificarContactosDeEmergencia(rutContact,nombreCompContact,relacionContact,telefonoContact,rutTrab,rutCont)
+    
+
 def inicio(user):
     tipoUser = TrabajadorDTO().tipoDeUsuario(user[0],user[1])
     if tipoUser[0] == 'Administrador'.capitalize() and tipoUser[1] == 'RRHH'.upper():
@@ -118,21 +165,21 @@ def inicio(user):
         menuGerencia(user)
     else:
         menuTrabajadores(user)
-
+        
 def modificarDatosTrabajador():
     ciclo = True
     while ciclo:
-        rut = input("Ingrese el rut\n")
+        rut = input("Ingrese el rut del trabajador a modificar\n")
         if len(rut) > 0 and rut not in [" "]:
             resultado = TrabajadorDTO().validarRut(rut)
             if resultado is not None:
                 while True:
                     print("\nPor favor elige una opción del siguiente menú:")
                     print("1. Modificar Datos Personales")
-                    print("2. Modificar Datos Laborales")
-                    print("3. Modificar Cargas Familiares")
-                    print("4. Modificar Contactos de Emergencia")
-                    print("5. Modificar Datos de Usuario")
+                    print("2. Modificar Cargas Familiares")
+                    print("3. Modificar Contactos de Emergencia")
+                    print("4. Modificar Datos de Usuario")
+                    print("5. ")
                     print("6. Volver al menu anterior")
                     
                     try:
@@ -146,8 +193,10 @@ def modificarDatosTrabajador():
                         modificarDatosPersonales(rut)
                     elif choice == 2:
                         print("\nHas elegido la opción 2")
+                        modificarCargasFamiliares(rut)
                     elif choice == 3:
                         print("\nHas elegido la opción 3")
+                        modificarContactosDeEmergencia(rut)
                     elif choice == 4:
                         print("\nHas elegido la opción 4")
                     elif choice == 5:
@@ -163,18 +212,7 @@ def modificarDatosTrabajador():
         else:
             print("Ingrese un rut valido")
 
-def modificarDatosPersonales(rut):
-    resultado = TrabajadorDTO().validarRut(rut)
-    print('Por motivos de seguridad el rut no se puede modificar desde el aplicativo')
-    print("Para modificar el rut de un trabajador debe contactarse con el encargado de la base de datos")
-    print(f"Sus datos personales actuales son: {resultado}")
-    nombre = input("Ingrese el nuevo nombre\n").capitalize()
-    apellido = input("ingrese el nuevo apellido\n").capitalize()
-    nombreComp = nombre+" "+apellido
-    genero = input("Ingrese el genero use (F) si es femenino o (M) si es masculino\n").upper()
-    telefono = input("Ingrese el nuevo numero de telefono\n")
-    direccion = input("Ingrese la nueva direccion\n")
-    TrabajadorDTO().modificarDatosPersonales(nombreComp,genero,telefono,direccion,rut)
+
     
 
 def menuAdministradorRRHH(user):

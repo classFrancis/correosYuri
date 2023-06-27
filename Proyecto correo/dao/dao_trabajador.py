@@ -104,11 +104,12 @@ class daoTrabajador:
         sql = """INSERT INTO trabajador(rut, nombre, genero, telefono, direccion)
                     VALUES(%s, %s, %s, %s, %s);"""
         c = self.getConex()
+        mensaje = "Datos Registrados con exito"  # Mensaje por defecto
         try:
             cursor = c.getConex().cursor()
             cursor.execute(sql, (rutTrab, nombTrab,generoTrab ,telefonoTrab ,direccionTrab))
             c.getConex().commit()
-            print("Datos Registrados con exito")
+            print(mensaje)
         except Exception as ex:
             print(traceback.print_exc())
             mensaje = "Problemas con la base de datos..vuelva a intentarlo"
@@ -116,6 +117,7 @@ class daoTrabajador:
             if c.getConex().is_connected():
                 c.closeConex()
         return mensaje
+
     
     def modificarDatosPersonales(self,nombre,genero,telefono,direccion,rut):
         sql = """UPDATE trabajador 

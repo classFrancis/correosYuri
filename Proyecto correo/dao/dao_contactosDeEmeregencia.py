@@ -31,3 +31,34 @@ class daoContactosDeEmergencia:
             if c.getConex().is_connected():
                 c.closeConex()
         return mensaje
+    
+    def obtenerDatosDeContactos(self,rutTrab):
+        sql = """select rut_contacto,nombre_contacto,relacionTrabajador,telefono_contacto 
+                    from contactosEmergencia 
+                    where rut_trabajador = %s"""
+        c = self.getConex()
+        try:
+            cursor = c.getConex().cursor()
+            cursor.execute(sql, (rutTrab,))
+
+            resultado = cursor.fetchall()
+        except Exception as ex:
+            print(traceback.print_exc())
+        finally:
+            if c.getConex().is_connected():
+                c.closeConex()
+        return resultado      
+    
+    def modificarContactosDeEmergencia(self,rutContact,nombreContact,relacionTrab,telefonoContact,rutTrab,rutCont):
+        sql ="""UPDATE contactosEmergencia
+        SET rut_contacto = %s,
+            nombre_contacto = %s,
+            relacionTrabajador = %s,
+            telefono_contacto = %s
+        WHERE rut_trabajador = %s and rut_contacto = %s;"""
+        c = self.getConex()
+        cursor = c.getConex().cursor()
+        cursor.execute(sql, (rutContact,nombreContact,relacionTrab,telefonoContact,rutTrab,rutCont))
+        c.getConex().commit()   
+        if c.getConex().is_connected():
+            c.closeConex()   

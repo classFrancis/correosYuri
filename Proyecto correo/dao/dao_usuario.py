@@ -33,7 +33,7 @@ class daoUsuario:
         return mensaje
     
     def validarNombreUsuario(self,nombUsuario):
-        sql = 'selecto * from usuario where nombre_de_usuario = %s;' 
+        sql = 'select * from usuario where nombre_de_usuario = %s;' 
         c = self.getConex()
         try:
             cursor = c.getConex().cursor()

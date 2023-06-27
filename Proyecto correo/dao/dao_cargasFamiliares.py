@@ -19,11 +19,7 @@ class daoCargasFamiliares:
             cursor = c.getConex().cursor()
             cursor.execute(sql, (rutCarga, nombreCarga,parentesco ,generoCarga ,rutTrab))
             c.getConex().commit()
-            filas = cursor.rowcount
-            if filas > 0:
-                mensaje ="Datos agregados satisfactoriamente"
-            else:
-                mensaje="No se Agregaron datos"
+            
         except Exception as ex:
             print(traceback.print_exc())
             mensaje = "Problemas con la base de datos..vuelva a intentarlo"
@@ -31,3 +27,32 @@ class daoCargasFamiliares:
             if c.getConex().is_connected():
                 c.closeConex()
         return mensaje
+    
+    def obtenerDatosDeCargas(self,rutTrab):
+        sql = "select rut_carga,nombre_carga,parentesco,genero_carga from cargasFamiliares where rut_trabajador = %s"
+        c = self.getConex()
+        try:
+            cursor = c.getConex().cursor()
+            cursor.execute(sql, (rutTrab,))
+
+            resultado = cursor.fetchall()
+        except Exception as ex:
+            print(traceback.print_exc())
+        finally:
+            if c.getConex().is_connected():
+                c.closeConex()
+        return resultado
+    
+    def modificarCargasFamiliares(self,rutCarga,nombreCarga,parentesco,generoCarga,rut,rutCar):
+        sql ="""UPDATE cargasFamiliares
+                SET rut_carga = %s,
+                    nombre_carga = %s,
+                    parentesco = %s,
+                    genero_carga = %s
+                WHERE rut_trabajador = %s and rut_carga = %s;"""
+        c = self.getConex()
+        cursor = c.getConex().cursor()
+        cursor.execute(sql, (rutCarga, nombreCarga,parentesco ,generoCarga ,rut,rutCar))
+        c.getConex().commit()   
+        if c.getConex().is_connected():
+            c.closeConex()

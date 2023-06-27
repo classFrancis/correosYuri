@@ -34,8 +34,12 @@ class TrabajadorDTO:
     
     def addTrabajador(self,rutTrab,nombTrab,generoTrab,telefonoTrab,direccionTrab):
         daotrabajador = daoTrabajador()
-        resultado = daotrabajador.addTrabajadaror(rutTrab,nombTrab,generoTrab,telefonoTrab,direccionTrab)
+        resultado = daotrabajador.addTrabajador(rutTrab,nombTrab,generoTrab,telefonoTrab,direccionTrab)
         return resultado
     
+    def modificarDatosPersonales(self,nombre,genero,telefono,direccion,rut):
+        daotrabajador = daoTrabajador()
+        resultado = daotrabajador.modificarDatosPersonales(nombre,genero,telefono,direccion,rut)
+        return resultado
     
         

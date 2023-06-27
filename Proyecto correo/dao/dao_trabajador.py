@@ -100,7 +100,7 @@ class daoTrabajador:
                 c.closeConex()
         return resultado
     
-    def addTrabajadaror(self,rutTrab,nombTrab,generoTrab,telefonoTrab,direccionTrab):
+    def addTrabajador(self,rutTrab,nombTrab,generoTrab,telefonoTrab,direccionTrab):
         sql = """INSERT INTO trabajador(rut, nombre, genero, telefono, direccion)
                     VALUES(%s, %s, %s, %s, %s);"""
         c = self.getConex()
@@ -108,11 +108,25 @@ class daoTrabajador:
             cursor = c.getConex().cursor()
             cursor.execute(sql, (rutTrab, nombTrab,generoTrab ,telefonoTrab ,direccionTrab))
             c.getConex().commit()
-            filas = cursor.rowcount
-            if filas > 0:
-                mensaje ="Datos agregados satisfactoriamente"
-            else:
-                mensaje="No se Agregaron datos"
+            print("Datos Registrados con exito")
+        except Exception as ex:
+            print(traceback.print_exc())
+            mensaje = "Problemas con la base de datos..vuelva a intentarlo"
+        finally:
+            if c.getConex().is_connected():
+                c.closeConex()
+        return mensaje
+    
+    def modificarDatosPersonales(self,nombre,genero,telefono,direccion,rut):
+        sql = """UPDATE trabajador 
+                    SET nombre = %s, genero = %s, telefono = %s, direccion = %s 
+                    WHERE rut = %s;"""
+        c = self.getConex()
+        try:
+            cursor = c.getConex().cursor()
+            cursor.execute(sql, (nombre,genero,telefono,direccion,rut))
+            c.getConex().commit()
+            print("Datos Personales modificados")
         except Exception as ex:
             print(traceback.print_exc())
             mensaje = "Problemas con la base de datos..vuelva a intentarlo"

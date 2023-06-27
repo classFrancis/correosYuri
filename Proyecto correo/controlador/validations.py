@@ -118,8 +118,65 @@ def inicio(user):
         menuGerencia(user)
     else:
         menuTrabajadores(user)
-        
-        
+
+def modificarDatosTrabajador():
+    ciclo = True
+    while ciclo:
+        rut = input("Ingrese el rut\n")
+        if len(rut) > 0 and rut not in [" "]:
+            resultado = TrabajadorDTO().validarRut(rut)
+            if resultado is not None:
+                while True:
+                    print("\nPor favor elige una opción del siguiente menú:")
+                    print("1. Modificar Datos Personales")
+                    print("2. Modificar Datos Laborales")
+                    print("3. Modificar Cargas Familiares")
+                    print("4. Modificar Contactos de Emergencia")
+                    print("5. Modificar Datos de Usuario")
+                    print("6. Volver al menu anterior")
+                    
+                    try:
+                        choice = int(input("\nTu elección: "))
+                    except ValueError:
+                        print("\n¡Error! Por favor, introduce un número.")
+                        continue
+                        
+                    if choice == 1:
+                        print("\nHas elegido la opción 1")
+                        modificarDatosPersonales(rut)
+                    elif choice == 2:
+                        print("\nHas elegido la opción 2")
+                    elif choice == 3:
+                        print("\nHas elegido la opción 3")
+                    elif choice == 4:
+                        print("\nHas elegido la opción 4")
+                    elif choice == 5:
+                        print("\nHas elegido la opción 5")
+                    elif choice == 6:
+                        print("\nHas elegido volver al menu anterior")
+                        ciclo = False
+                        break
+                    else:
+                        print("\n¡Error! Por favor, elige una opción válida.")
+            else:
+                print("El rut ingresado no esta registrado")    
+        else:
+            print("Ingrese un rut valido")
+
+def modificarDatosPersonales(rut):
+    resultado = TrabajadorDTO().validarRut(rut)
+    print('Por motivos de seguridad el rut no se puede modificar desde el aplicativo')
+    print("Para modificar el rut de un trabajador debe contactarse con el encargado de la base de datos")
+    print(f"Sus datos personales actuales son: {resultado}")
+    nombre = input("Ingrese el nuevo nombre\n").capitalize()
+    apellido = input("ingrese el nuevo apellido\n").capitalize()
+    nombreComp = nombre+" "+apellido
+    genero = input("Ingrese el genero use (F) si es femenino o (M) si es masculino\n").upper()
+    telefono = input("Ingrese el nuevo numero de telefono\n")
+    direccion = input("Ingrese la nueva direccion\n")
+    TrabajadorDTO().modificarDatosPersonales(nombreComp,genero,telefono,direccion,rut)
+    
+
 def menuAdministradorRRHH(user):
      while True:
         print("\nBienvenid@ al Menu de Administrador")
@@ -146,6 +203,7 @@ def menuAdministradorRRHH(user):
             addTrabajadorAlSistema()
         elif choice == 3:
             print("\nHas elegido la opción 3")
+            modificarDatosTrabajador()
         elif choice == 4:
             print("\nHas elegido la opción 4")
         elif choice == 5:

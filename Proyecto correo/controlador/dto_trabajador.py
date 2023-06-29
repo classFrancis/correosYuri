@@ -41,5 +41,48 @@ class TrabajadorDTO:
         daotrabajador = daoTrabajador()
         resultado = daotrabajador.modificarDatosPersonales(nombre,genero,telefono,direccion,rut)
         return resultado
-    
-        
+
+    def showDataGender(self, gender):
+        daotrabajador = daoTrabajador()
+        resultado = daotrabajador.showDataGender(gender)
+        lista = []
+        if resultado is not None:
+            for u in resultado:
+                worker = Trabajador(u[0],u[1],u[2],u[3],u[4],Usuario(u[5],u[6],u[7]),DatosLaborales(u[8],u[9],u[10],u[11]),CargasFamiliares(u[12],u[13],u[14],u[15],u[16]),ContactosDeEmergencia(u[17],u[18],u[19],u[20],u[21]))
+                lista.append(worker)
+        return lista
+
+    def showDataCargo(self, cargo):
+        daotrabajador = daoTrabajador()
+        resultado = daotrabajador.showDataCargo(cargo)
+        lista = []
+        if resultado is not None:
+            for u in resultado:
+                worker = Trabajador(u[0],u[1],u[2],u[3],u[4],Usuario(u[5],u[6],u[7]),DatosLaborales(u[8],u[9],u[10],u[11]),CargasFamiliares(u[12],u[13],u[14],u[15],u[16]),ContactosDeEmergencia(u[17],u[18],u[19],u[20],u[21]))
+                lista.append(worker)
+        return lista
+
+    def showDataAreaDep(self, area, dep):
+        daotrabajador = daoTrabajador()
+        resultado = daotrabajador.showDataAreaDep(area, dep)
+        lista = []
+        if resultado is not None:
+            for u in resultado:
+                worker = Trabajador(u[0],u[1],u[2],u[3],u[4],Usuario(u[5],u[6],u[7]),DatosLaborales(u[8],u[9],u[10],u[11]),CargasFamiliares(u[12],u[13],u[14],u[15],u[16]),ContactosDeEmergencia(u[17],u[18],u[19],u[20],u[21]))
+                lista.append(worker)
+        return lista
+
+    def showAll(self):
+        daotrabajador = daoTrabajador()
+        resultado = daotrabajador.showAll()
+        lista = []
+        if resultado is not None:
+            for u in resultado:
+                worker = Trabajador(u[0],u[1],u[2],u[3],u[4],Usuario(u[5],u[6],u[7]),DatosLaborales(u[8],u[9],u[10],u[11]),CargasFamiliares(u[12],u[13],u[14],u[15],u[16]),ContactosDeEmergencia(u[17],u[18],u[19],u[20],u[21]))
+                lista.append(worker)
+        return lista
+
+    def deleteDatoTrabajador(self, dato,rut):
+        daotrabajador = daoTrabajador()
+        resultado = daotrabajador.deleteDatoTrabajador(dato, rut)
+        return resultado

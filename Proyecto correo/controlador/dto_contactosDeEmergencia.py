@@ -16,3 +16,8 @@ class ContactosDeEmergenciaDTO:
         daocontactosdeemergencia = daoContactosDeEmergencia()
         resultado = daocontactosdeemergencia.modificarContactosDeEmergencia(rutContact,nombreContact,relacionTrab,telefonoContact,rutTrab,rutCont)
         return resultado
+
+    def deleteContactEmer(self, dato):
+        daocontactosdeemergencia = daoContactosDeEmergencia()
+        resultado = daocontactosdeemergencia.deleteContactEmer(dato)
+        return resultado

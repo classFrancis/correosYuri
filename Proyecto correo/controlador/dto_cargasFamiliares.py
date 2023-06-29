@@ -17,3 +17,8 @@ class CargasFamiliaresDTO:
         daocargasfamiliares = daoCargasFamiliares()
         resultado = daocargasfamiliares.modificarCargasFamiliares(rutCarga,nombreCarga,parentesco,generoCarga,rutTrab,rutCar)
         return resultado
+
+    def deleteCargaFam(self, dato):
+        daocargasfamiliares = daoCargasFamiliares()
+        resultado = daocargasfamiliares.deleteCargaFam(dato)
+        return resultado

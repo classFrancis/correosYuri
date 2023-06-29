@@ -155,7 +155,76 @@ def modificarContactosDeEmergencia(rutTrab):
     relacionContact = input("Ingrese la relacion del contacto con el trabajador\n").capitalize()
     telefonoContact = input("Ingrese el telefono del contacto de emergencia\n")
     ContactosDeEmergenciaDTO().modificarContactosDeEmergencia(rutContact,nombreCompContact,relacionContact,telefonoContact,rutTrab,rutCont)
-    
+
+def listGender(gender):
+    print("Listado empleados por género")
+    resultado = TrabajadorDTO().showDataGender(gender)
+    if len(resultado) > 0:
+        for u in resultado:
+            print("<------------------------------------->")
+            print(u)
+            print("<------------------------------------->")
+    else:
+        print("no hay resultados")
+
+def listCargo(cargo):
+    print("Listado empleados por cargo")
+    resultado = TrabajadorDTO().showDataCargo(cargo)
+    if len(resultado) > 0:
+        for u in resultado:
+            print("<------------------------------------->")
+            print(u)
+            print("<------------------------------------->")
+    else:
+        print("no hay resultados")
+
+def listAreaDep(area, dep):
+    print("Listado empleados por cargo y departamento")
+    resultado = TrabajadorDTO().showDataAreaDep(area, dep)
+    if len(resultado) > 0:
+        for u in resultado:
+            print("<------------------------------------->")
+            print(u)
+            print("<------------------------------------->")
+    else:
+        print("no hay resultados")
+
+def listCargFam(rutTrab):
+    resultado = CargasFamiliaresDTO().obtenerDatosDeCargas(rutTrab)
+    print("Estas son las cargas familiares asociadas:")
+    for x in resultado:
+        print(x)
+
+def listaContEmer(rutTrab):
+    resultado = ContactosDeEmergenciaDTO().obtenerDatosDeContactos(rutTrab)
+    print("Estos son los contactos de emergencia asociados:")
+    for x in resultado:
+        print(x)
+
+def listAllWorkers():
+    resultado = TrabajadorDTO().showAll()
+    if len(resultado) > 0:
+        for u in resultado:
+            print("<------------------------------------->")
+            print(u)
+            print("<------------------------------------->")
+    else:
+        print("no hay resultados")
+
+def deleteSpecificData(dato, rut):
+    print("Buscando el dato especificado a eliminar")
+    resul = TrabajadorDTO().deleteDatoTrabajador(dato, rut)
+    return resul
+
+def deleteCargaFam(dato):
+    print("Buscando el dato especificado a eliminar")
+    resul = CargasFamiliaresDTO().deleteCargaFam(dato)
+    return resul
+
+def deleteContactEmer(dato):
+    print("Buscando el dato especificado a eliminar")
+    resul = ContactosDeEmergenciaDTO().deleteContactEmer(dato)
+    return resul
 
 def inicio(user):
     tipoUser = TrabajadorDTO().tipoDeUsuario(user[0],user[1])
@@ -165,7 +234,7 @@ def inicio(user):
         menuGerencia(user)
     else:
         menuTrabajadores(user)
-        
+
 def modificarDatosTrabajador():
     ciclo = True
     while ciclo:
@@ -178,42 +247,68 @@ def modificarDatosTrabajador():
                     print("1. Modificar Datos Personales")
                     print("2. Modificar Cargas Familiares")
                     print("3. Modificar Contactos de Emergencia")
-                    print("4. Modificar Datos de Usuario")
-                    print("5. ")
-                    print("6. Volver al menu anterior")
-                    
+                    print("4. Volver al menu anterior")
+
                     try:
                         choice = int(input("\nTu elección: "))
                     except ValueError:
                         print("\n¡Error! Por favor, introduce un número.")
                         continue
-                        
+
                     if choice == 1:
                         print("\nHas elegido la opción 1")
-                        modificarDatosPersonales(rut)
+                        option = input(
+                            "Si desea ingresar una modificación ingrese 1, sino ingrese 2 para eliminar un dato. Para volver ingrese 3\n")
+                        if option == "1":
+                            modificarDatosPersonales(rut)
+                        elif option == "2":
+                            print("Puede eliminar nombre, género, teléfono o dirección")
+                            print("Ingrese [N] para nombre, [G], para género, [T] para teléfono o [D] para dirección")
+                            dato = input("Elija qué dato personal desea eliminar\n").upper()
+                            deleteSpecificData(dato, rut)
+                        else:
+                            print("\nHas elegido volver al menu anterior")
+                            ciclo = False
+                            break
                     elif choice == 2:
                         print("\nHas elegido la opción 2")
-                        modificarCargasFamiliares(rut)
+                        option = input(
+                            "Si desea ingresar una modificación ingrese 1, sino ingrese 2 para eliminar un dato. Para volver ingrese 3\n")
+                        if option == "1":
+                            modificarCargasFamiliares(rut)
+                        elif option == "2":
+                            listCargFam(rut)
+                            dato = input("Elija qué carga familiar desea eliminar ingresando el rut de dicha carga\n")
+                            deleteCargaFam(dato)
+                        else:
+                            print("\nHas elegido volver al menu anterior")
+                            ciclo = False
+                            break
                     elif choice == 3:
                         print("\nHas elegido la opción 3")
-                        modificarContactosDeEmergencia(rut)
+                        option = input(
+                            "Si desea ingresar una modificación ingrese 1, sino ingrese 2 para eliminar un dato. Para volver ingrese 3\n")
+                        if option == "1":
+                            modificarContactosDeEmergencia(rut)
+                        elif option == "2":
+                            listaContEmer(rut)
+                            dato = input(
+                                "Elija qué contacto de emergencia desea eliminar ingresando el rut de dicho contacto\n")
+                            deleteContactEmer(dato)
+                        else:
+                            print("\nHas elegido volver al menu anterior")
+                            ciclo = False
+                            break
                     elif choice == 4:
-                        print("\nHas elegido la opción 4")
-                    elif choice == 5:
-                        print("\nHas elegido la opción 5")
-                    elif choice == 6:
                         print("\nHas elegido volver al menu anterior")
                         ciclo = False
                         break
                     else:
                         print("\n¡Error! Por favor, elige una opción válida.")
             else:
-                print("El rut ingresado no esta registrado")    
+                print("El rut ingresado no esta registrado")
         else:
             print("Ingrese un rut valido")
-
-
-    
 
 def menuAdministradorRRHH(user):
      while True:
@@ -222,9 +317,10 @@ def menuAdministradorRRHH(user):
         print("1. Ver Mis Datos")
         print("2. Registrar Trabajador en el sistema")
         print("3. Modificar datos de trabajador")
-        print("4. Opción 4")
-        print("5. Opción 5")
-        print("6. Salir")
+        print("4. Listar trabajadores por género")
+        print("5. Listar trabajadores por cargo")
+        print("6. Listar trabajadores área y departamento")
+        print("7. Salir")
         
         try:
             choice = int(input("\nTu elección: "))
@@ -244,25 +340,33 @@ def menuAdministradorRRHH(user):
             modificarDatosTrabajador()
         elif choice == 4:
             print("\nHas elegido la opción 4")
+            gender = input("Elija el género a buscar [M] o [F]\n").upper()
+            print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n----------------------------------\n')
+            listGender(gender)
         elif choice == 5:
             print("\nHas elegido la opción 5")
+            cargo = input("Coloque el cargo a buscar\n").capitalize()
+            print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n----------------------------------\n')
+            listCargo(cargo)
         elif choice == 6:
+            print("\nHas elegido la opción 6")
+            area = input("Coloque el cargo a buscar\n").capitalize()
+            departamento = input("Coloque el departamento a buscar\n").upper()
+            print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n----------------------------------\n')
+            listAreaDep(area, departamento)
+        elif choice == 7:
             print("\nHas elegido salir. ¡Hasta luego!")
             break
         else:
             print("\n¡Error! Por favor, elige una opción válida.")
-    
-      
+
 def menuGerencia(user):
     while True:
         print("\nBienvenid@ al Menu Gerencial")
         print("\nPor favor elige una opción del siguiente menú:")
         print("1. Ver Mis Datos")
-        print("2. Opción 2")
-        print("3. Opción 3")
-        print("4. Opción 4")
-        print("5. Opción 5")
-        print("6. Salir")
+        print("2. Listar todos los trabajadores")
+        print("3. Salir")
         
         try:
             choice = int(input("\nTu elección: "))
@@ -276,13 +380,8 @@ def menuGerencia(user):
             print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n----------------------------------\n{datosUser}')
         elif choice == 2:
             print("\nHas elegido la opción 2")
+            listAllWorkers()
         elif choice == 3:
-            print("\nHas elegido la opción 3")
-        elif choice == 4:
-            print("\nHas elegido la opción 4")
-        elif choice == 5:
-            print("\nHas elegido la opción 5")
-        elif choice == 6:
             print("\nHas elegido salir. ¡Hasta luego!")
             break
         else:
@@ -293,11 +392,8 @@ def menuTrabajadores(user):
         print('\nBienvenid@ al Menu Principal')
         print("\nPor favor elige una opción del siguiente menú:")
         print("1. Ver Mis Datos")
-        print("2. Opción 2")
-        print("3. Opción 3")
-        print("4. Opción 4")
-        print("5. Opción 5")
-        print("6. Salir")
+        print("2. Modificar o eliminar datos de trabajador")
+        print("3. Salir")
         
         try:
             choice = int(input("\nTu elección: "))
@@ -311,13 +407,8 @@ def menuTrabajadores(user):
             print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n-----------------------------------\n{datosUser}')
         elif choice == 2:
             print("\nHas elegido la opción 2")
+            modificarDatosTrabajador()
         elif choice == 3:
-            print("\nHas elegido la opción 3")
-        elif choice == 4:
-            print("\nHas elegido la opción 4")
-        elif choice == 5:
-            print("\nHas elegido la opción 5")
-        elif choice == 6:
             print("\nHas elegido salir. ¡Hasta luego!")
             break
         else:

@@ -291,6 +291,7 @@ class daoTrabajador:
                     SET nombre = %s, genero = %s, telefono = %s, direccion = %s 
                     WHERE rut = %s;"""
         c = self.getConex()
+        mensaje = "Datos personales modificados con éxito."  # Mensaje de éxito por defecto
         try:
             cursor = c.getConex().cursor()
             cursor.execute(sql, (nombre,genero,telefono,direccion,rut))
@@ -303,6 +304,7 @@ class daoTrabajador:
             if c.getConex().is_connected():
                 c.closeConex()
         return mensaje
+
 
     def deleteDatoTrabajador(self, dato, rut):
         if dato == 'N':

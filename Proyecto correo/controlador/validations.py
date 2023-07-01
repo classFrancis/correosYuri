@@ -234,7 +234,73 @@ def inicio(user):
         menuGerencia(user)
     else:
         menuTrabajadores(user)
+        
+def modificarMisDatosPersonales(rut):
+    resultado = TrabajadorDTO().validarRut(rut)
+    print(resultado)
+    if resultado is not None:
+        while True:
+            print("\nPor favor elige una opción del siguiente menú:")
+            print("1. Modificar Datos Personales")
+            print("2. Modificar Cargas Familiares")
+            print("3. Modificar Contactos de Emergencia")
+            print("4. Volver al menu anterior")
 
+            try:
+                choice = int(input("\nTu elección: "))
+            except ValueError:
+                print("\n¡Error! Por favor, introduce un número.")
+                continue
+
+            if choice == 1:
+                print("\nHas elegido la opción 1")
+                option = input(
+                    "Si desea ingresar una modificación ingrese 1, sino ingrese 2 para eliminar un dato. Para volver ingrese 3\n")
+                if option == "1":
+                    modificarDatosPersonales(rut)
+                elif option == "2":
+                    print("Puede eliminar nombre, género, teléfono o dirección")
+                    print("Ingrese [N] para nombre, [G], para género, [T] para teléfono o [D] para dirección")
+                    dato = input("Elija qué dato personal desea eliminar\n").upper()
+                    deleteSpecificData(dato, rut)
+                else:
+                    print("\nHas elegido volver al menu anterior")
+                    break
+            elif choice == 2:
+                print("\nHas elegido la opción 2")
+                option = input(
+                    "Si desea ingresar una modificación ingrese 1, sino ingrese 2 para eliminar un dato. Para volver ingrese 3\n")
+                if option == "1":
+                    modificarCargasFamiliares(rut)
+                elif option == "2":
+                    listCargFam(rut)
+                    dato = input("Elija qué carga familiar desea eliminar ingresando el rut de dicha carga\n")
+                    deleteCargaFam(dato)
+                else:
+                    print("\nHas elegido volver al menu anterior")
+                    break
+            elif choice == 3:
+                print("\nHas elegido la opción 3")
+                option = input(
+                    "Si desea ingresar una modificación ingrese 1, sino ingrese 2 para eliminar un dato. Para volver ingrese 3\n")
+                if option == "1":
+                    modificarContactosDeEmergencia(rut)
+                elif option == "2":
+                    listaContEmer(rut)
+                    dato = input(
+                        "Elija qué contacto de emergencia desea eliminar ingresando el rut de dicho contacto\n")
+                    deleteContactEmer(dato)
+                else:
+                    print("\nHas elegido volver al menu anterior")
+                    break
+            elif choice == 4:
+                print("\nHas elegido volver al menu anterior")
+                break
+            else:
+                print("\n¡Error! Por favor, elige una opción válida.")
+    else:
+        print("El rut ingresado no esta registrado")
+    
 def modificarDatosTrabajador():
     ciclo = True
     while ciclo:
@@ -407,7 +473,9 @@ def menuTrabajadores(user):
             print(f'\n-----------------------------------\n|Estos son tus datos en el sistema:\n-----------------------------------\n{datosUser}')
         elif choice == 2:
             print("\nHas elegido la opción 2")
-            modificarDatosTrabajador()
+            trabajador = TrabajadorDTO().mostrarDatosPorUseryPass(user[0],user[1])
+            rutTrab = trabajador.getRutTrabajador()
+            modificarMisDatosPersonales(rutTrab)
         elif choice == 3:
             print("\nHas elegido salir. ¡Hasta luego!")
             break

@@ -15,11 +15,12 @@ class daoCargasFamiliares:
         sql = """INSERT INTO cargasFamiliares(rut_carga, nombre_carga, parentesco, genero_carga, rut_trabajador)
                     VALUES(%s, %s, %s, %s, %s);"""
         c = self.getConex()
+        mensaje = "Inserción de datos exitosa."  # Mensaje de éxito por defecto
         try:
             cursor = c.getConex().cursor()
-            cursor.execute(sql, (rutCarga, nombreCarga,parentesco ,generoCarga ,rutTrab))
+            cursor.execute(sql, (rutCarga, nombreCarga, parentesco, generoCarga, rutTrab))
             c.getConex().commit()
-            
+
         except Exception as ex:
             print(traceback.print_exc())
             mensaje = "Problemas con la base de datos..vuelva a intentarlo"
@@ -27,6 +28,7 @@ class daoCargasFamiliares:
             if c.getConex().is_connected():
                 c.closeConex()
         return mensaje
+
     
     def obtenerDatosDeCargas(self,rutTrab):
         sql = "select rut_carga,nombre_carga,parentesco,genero_carga from cargasFamiliares where rut_trabajador = %s"
@@ -51,11 +53,19 @@ class daoCargasFamiliares:
                     genero_carga = %s
                 WHERE rut_trabajador = %s and rut_carga = %s;"""
         c = self.getConex()
-        cursor = c.getConex().cursor()
-        cursor.execute(sql, (rutCarga, nombreCarga,parentesco ,generoCarga ,rut,rutCar))
-        c.getConex().commit()   
-        if c.getConex().is_connected():
-            c.closeConex()
+        mensaje = "Carga familiar modificada con éxito."  # Mensaje de éxito por defecto
+        try:
+            cursor = c.getConex().cursor()
+            cursor.execute(sql, (rutCarga, nombreCarga,parentesco ,generoCarga ,rut,rutCar))
+            c.getConex().commit()   
+        except Exception as ex:
+            print(traceback.print_exc())
+            mensaje = "Problemas con la base de datos..vuelva a intentarlo"
+        finally:
+            if c.getConex().is_connected():
+                c.closeConex()
+        return mensaje
+
 
     def deleteCargaFam(self, dato):
         sql = "DELETE FROM cargasfamiliares WHERE rut_carga = %s"

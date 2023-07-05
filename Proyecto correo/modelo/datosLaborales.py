@@ -1,6 +1,31 @@
 
 
 class DatosLaborales():
+    """
+    La clase DatosLaborales representa la información laboral de un empleado en el sistema. 
+    Almacena el ID de los datos laborales, la fecha de contratación, el cargo y el departamento del empleado.
+    
+    Atributos:
+        idDatosLaborales (str): La identificación de los datos laborales.
+        fechaContratacion (datetime): La fecha de contratación del empleado.
+        cargo (str): El cargo del empleado.
+        depto (str): El departamento en el que trabaja el empleado.
+        
+    Métodos:
+        getIdDatosLaborales: Retorna la identificación de los datos laborales.
+        setIdDatosLaborales: Establece la identificación de los datos laborales.
+        
+        getFechaContratacion: Retorna la fecha de contratación del empleado.
+        setFechaContratacion: Establece la fecha de contratación del empleado.
+        
+        getCargo: Retorna el cargo del empleado.
+        setCargo: Establece el cargo del empleado.
+        
+        getDepto: Retorna el departamento en el que trabaja el empleado.
+        setDepto: Establece el departamento en el que trabaja el empleado.
+        
+        __str__: Retorna una representación en cadena de caracteres de los datos laborales del empleado.
+    """
     def __init__(self,idDatosLaborales,fechaContratacion,cargo,depto):
         self.__idDatosLaborales = idDatosLaborales
         self.__fechaContratacion = fechaContratacion
@@ -22,10 +47,10 @@ class DatosLaborales():
     def getFechaContratacion(self):
         return self.__fechaContratacion
     
-    def setDepto(self, cargo):
+    def setCargo(self, cargo):
         self.__cargo = cargo
 
-    def getDepto(self):
+    def getCargo(self):
         return self.__cargo
 
     def setDepto(self, depto):

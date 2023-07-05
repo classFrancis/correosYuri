@@ -6,6 +6,52 @@ from modelo.contactosDeEmergencia import ContactosDeEmergencia
 
 
 class Trabajador:
+    """
+    La clase Trabajador representa a un empleado en el sistema. 
+    Almacena datos personales, laborales, 
+    información sobre la familia del trabajador (cargas familiares), y contactos de emergencia.
+    
+    Atributos:
+        rutTrabajador (str): El RUT del trabajador.
+        nombreTrabajador (str): El nombre del trabajador.
+        generoTrabajador (str): El género del trabajador.
+        telefonoTrabajador (str): El teléfono del trabajador.
+        direccionTrabajador (str): La dirección del trabajador.
+        usuario (obj): El objeto Usuario asociado al trabajador.
+        datosLaborales (obj): El objeto DatosLaborales que contiene la información laboral del trabajador.
+        cargasFamiliares (obj): El objeto CargasFamiliares que contiene la información sobre la familia del trabajador.
+        contactosDeEmergencia (obj): El objeto ContactosDeEmergencia que contiene la información de contactos de emergencia del trabajador.
+        
+    Métodos:
+        getRutTrabajador: Retorna el RUT del trabajador.
+        setRutTrabajador: Establece el RUT del trabajador.
+        
+        getNombreTrabajador: Retorna el nombre del trabajador.
+        setNombreTrabajador: Establece el nombre del trabajador.
+        
+        getGeneroTrabajador: Retorna el género del trabajador.
+        setGeneroTrabajador: Establece el género del trabajador.
+        
+        getTelefonoTrabajador: Retorna el teléfono del trabajador.
+        setTelefonoTrabajador: Establece el teléfono del trabajador.
+        
+        getDireccionTrabajador: Retorna la dirección del trabajador.
+        setDireccionTrabajador: Establece la dirección del trabajador.
+        
+        getUsuario: Retorna el objeto Usuario del trabajador.
+        setUsuario: Establece el objeto Usuario del trabajador.
+        
+        getDatosLaborales: Retorna el objeto DatosLaborales del trabajador.
+        setDatosLaborales: Establece el objeto DatosLaborales del trabajador.
+        
+        getCargasFamiliares: Retorna el objeto CargasFamiliares del trabajador.
+        setCargasFamiliares: Establece el objeto CargasFamiliares del trabajador.
+        
+        getContactosDeEmergencia: Retorna el objeto ContactosDeEmergencia del trabajador.
+        setContactosDeEmergencia: Establece el objeto ContactosDeEmergencia del trabajador.
+        
+        __str__: Retorna una representación en cadena de caracteres de los datos del trabajador.
+    """   
     def __init__(self,rutTrabajador,nombreTrabajador,generoTrabajador,telefonoTrabajador,direccionTrabajador,usuario,datosLaborales,cargasFamiliares,contactosDeEmergencia):
         self.__rutTrabajador = rutTrabajador
         self.__nombreTrabajador= nombreTrabajador

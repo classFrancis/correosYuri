@@ -1,6 +1,36 @@
 
 
 class CargasFamiliares():
+    """
+    La clase CargasFamiliares representa una carga familiar de un empleado en el sistema. 
+    Almacena el ID de la carga, RUT de la carga, nombre de la carga, 
+    parentesco de la carga, y el género de la carga.
+    
+    Atributos:
+        idCarga (str): La identificación de la carga familiar.
+        rutCarga (str): El RUT de la carga familiar.
+        nombreCarga (str): El nombre de la carga familiar.
+        parentescoCarga (str): El parentesco de la carga familiar con el empleado.
+        generoCarga (str): El género de la carga familiar.
+        
+    Métodos:
+        getIdCarga: Retorna la identificación de la carga familiar.
+        setIdCarga: Establece la identificación de la carga familiar.
+        
+        getRutCarga: Retorna el RUT de la carga familiar.
+        setRutCarga: Establece el RUT de la carga familiar.
+        
+        getNombreCarga: Retorna el nombre de la carga familiar.
+        setNombreCarga: Establece el nombre de la carga familiar.
+        
+        getParentescoCarga: Retorna el parentesco de la carga familiar con el empleado.
+        setParentescoCarga: Establece el parentesco de la carga familiar con el empleado.
+        
+        getGeneroCarga: Retorna el género de la carga familiar.
+        setGeneroCarga: Establece el género de la carga familiar.
+        
+        __str__: Retorna una representación en cadena de caracteres de la carga familiar.
+    """
     def __init__(self,idCarga,rutCarga,nombreCarga,parentescoCarga,generoCarga):
         self.__idCarga = idCarga
         self.__rutCarga = rutCarga
